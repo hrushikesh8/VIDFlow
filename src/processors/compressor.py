@@ -43,4 +43,4 @@ if __name__ == "__main__":
 # Example Command:
 # python src/processors/compressor.py "C:\Videos\HeavyFile.mkv" "128k"
 #
-# (This copies the video exactly but shrinks audio to 128k bitrate)
+# (This copies the video exactly but shrinks the audio to 128 kbps AAC)

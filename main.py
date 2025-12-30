@@ -12,6 +12,7 @@ from src.processors.stitcher import VideoStitcher
 from src.processors.watermark import Watermarker
 from src.processors.gif_maker import GifMaker
 from src.processors.remaster import VideoRemaster
+from src.processors.extractor import AudioExtractor
 
 def scan_folder(folder_path, extensions):
     files = []
@@ -37,8 +38,9 @@ def main():
     print("10. Create High-Quality GIF")
     print("11. Remaster Old Footage (Denoise + Upscale)")
     print("12. Division (Split into 2 Parts)")
+    print("13. Extract Audio (MP3/WAV)")
 
-    choice = input("\nSelect an option (1-12): ")
+    choice = input("\nSelect an option (1-13): ")
     
     # --- 1. CONVERT ---
     if choice == "1":
@@ -176,6 +178,17 @@ def main():
                 print("❌ Division failed.")
         except ValueError:
             print("Invalid number.")
+        # --- OPTION 13: EXTRACT AUDIO ---
+    elif choice == "13":
+        path = input("Enter video path: ").strip('"')
+        fmt = input("Output format (mp3/wav/original): ").lower()
+
+        extractor = AudioExtractor()
+        success, out = extractor.extract_audio(path, fmt)
+    if success:
+        print(f"✅ Audio saved to: {out}")
+    else:
+        print("❌ Extraction failed.")  
 
 if __name__ == "__main__":
     main()
